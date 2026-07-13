@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LTXTools.Views.ShutdownPage">
+    <VerticalStackLayout Margin="30" Spacing="15">
+        <Label Text="⏰ 定时关机" FontSize="28" FontAttributes="Bold" TextColor="#1A3C5E" HorizontalOptions="Center"/>
+        
+        <Border BackgroundColor="#F0F7FF" Padding="15" StrokeThickness="0">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="20">
+                <RadioButton x:Name="rbMinutes" Content="📅 倒计时" IsChecked="True" FontSize="16"/>
+                <RadioButton x:Name="rbTime" Content="🕐 指定时间" FontSize="16"/>
+            </HorizontalStackLayout>
+        </Border>
+        
+        <Border x:Name="panelMinutes" BackgroundColor="#F5F9FF" Padding="20" StrokeThickness="0">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Label Text="⏱️" FontSize="22" VerticalOptions="Center"/>
+                <Entry x:Name="txtMinutes" Text="30" WidthRequest="80" FontSize="18" Keyboard="Numeric"/>
+                <Label Text="分钟后关机" FontSize="16" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+        </Border>
+        
+        <Border x:Name="panelTime" BackgroundColor="#F5F9FF" Padding="20" StrokeThickness="0" IsVisible="False">
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Label Text="🕐" FontSize="22" VerticalOptions="Center"/>
+                <Entry x:Name="txtHour" Text="22" WidthRequest="50" FontSize="18" Keyboard="Numeric"/>
+                <Label Text="时" FontSize="16" VerticalOptions="Center"/>
+                <Entry x:Name="txtMinute" Text="30" WidthRequest="50" FontSize="18" Keyboard="Numeric"/>
+                <Label Text="分关机" FontSize="16" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+        </Border>
+        
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+            <Button x:Name="btnStart" Text="🛑 开始关机" Clicked="btnStart_Clicked" BackgroundColor="#E74C3C" TextColor="White" WidthRequest="150" HeightRequest="40" FontAttributes="Bold"/>
+            <Button x:Name="btnCancel" Text="❌ 取消" Clicked="btnCancel_Clicked" BackgroundColor="#95A5A6" TextColor="White" WidthRequest="120" HeightRequest="40" FontAttributes="Bold"/>
+            <Button x:Name="btnQuery" Text="🔍 查询" Clicked="btnQuery_Clicked" BackgroundColor="#3498DB" TextColor="White" WidthRequest="120" HeightRequest="40" FontAttributes="Bold"/>
+        </HorizontalStackLayout>
+        
+        <Border BackgroundColor="#F5F9FF" Padding="15" StrokeThickness="2" Stroke="#4A90D9">
+            <VerticalStackLayout>
+                <Label Text="📋 状态" FontSize="16" FontAttributes="Bold" TextColor="#1A3C5E"/>
+                <Label x:Name="txtStatus" Text="✅ 就绪" FontSize="14" TextColor="#333" Margin="0,8,0,0"/>
+            </VerticalStackLayout>
+        </Border>
+    </VerticalStackLayout>
+</ContentView>

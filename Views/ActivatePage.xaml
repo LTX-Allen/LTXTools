@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LTXTools.Views.ActivatePage">
+    <VerticalStackLayout Margin="30" Spacing="15">
+        <Label Text="🔑 激活工具" FontSize="28" FontAttributes="Bold" TextColor="#1A3C5E" HorizontalOptions="Center"/>
+        <Entry x:Name="txtActivationCode" Placeholder="请输入激活码..." IsPassword="True"/>
+        <Button x:Name="btnActivate" Text="✅ 激活" Clicked="btnActivate_Clicked" BackgroundColor="#4A90D9" TextColor="White" HeightRequest="45" FontAttributes="Bold"/>
+        <Label x:Name="txtStatus" Text="⭕ 未激活" FontSize="14" TextColor="#333"/>
+    </VerticalStackLayout>
+</ContentView>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LTXTools.MainPage"
+             Title="⚡ LTX 工具集"
+             BackgroundColor="#E8F4FD">
+
+    <Grid ColumnDefinitions="180,*">
+        <!-- 左侧导航栏 -->
+        <Border Grid.Column="0"
+                BackgroundColor="#1A3C5E"
+                Padding="10,30,10,20">
+            <VerticalStackLayout Spacing="5">
+                <Label Text="⚡ LTX 工具集"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,20"/>
+
+                <Button x:Name="btnFileCopy"
+                        Text="📁 文件复制"
+                        Clicked="btnFileCopy_Clicked"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        FontSize="14"
+                        HorizontalOptions="Fill"
+                        Padding="15,10"/>
+
+                <Button x:Name="btnActivate"
+                        Text="🔑 激活工具"
+                        Clicked="btnActivate_Clicked"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        FontSize="14"
+                        HorizontalOptions="Fill"
+                        Padding="15,10"/>
+
+                <Button x:Name="btnProcess"
+                        Text="⚙️ 进程管理器"
+                        Clicked="btnProcess_Clicked"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        FontSize="14"
+                        HorizontalOptions="Fill"
+                        Padding="15,10"/>
+
+                <Button x:Name="btnProcessGUI"
+                        Text="🖥️ GUI 进程"
+                        Clicked="btnProcessGUI_Clicked"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        FontSize="14"
+                        HorizontalOptions="Fill"
+                        Padding="15,10"/>
+
+                <Button x:Name="btnFormat"
+                        Text="💾 磁盘格式化"
+                        Clicked="btnFormat_Clicked"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        FontSize="14"
+                        HorizontalOptions="Fill"
+                        Padding="15,10"/>
+
+                <Button x:Name="btnShutdown"
+                        Text="⏰ 定时关机"
+                        Clicked="btnShutdown_Clicked"
+                        BackgroundColor="Transparent"
+                        TextColor="White"
+                        FontSize="14"
+                        HorizontalOptions="Fill"
+                        Padding="15,10"/>
+
+                <Label Text="版本 v1.0"
+                       FontSize="12"
+                       TextColor="#6A8CAE"
+                       HorizontalOptions="Center"
+                       Margin="0,40,0,0"/>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- 右侧内容区域 -->
+        <ContentView x:Name="MainContent"
+                     Grid.Column="1"
+                     Margin="15"
+                     BackgroundColor="White"/>
+    </Grid>
+</ContentPage>
