@@ -1,0 +1,49 @@
+name: Build macOS App
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+    
+    - name: 安装 .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+    
+    - name: 安装 MAUI 工作负载
+      run: |
+        dotnet workload install maui --ignore-failed-sources
+        dotnet workload install maccatalyst --ignore-failed-sources
+    
+    - name: 还原依赖
+      run: dotnet restore
+    
+    - name: 构建 macOS 应用
+      run: dotnet build -f net9.0-maccatalyst -c Release --no-restore
+    
+    - name: 发布为 .app
+      run: dotnet publish -f net9.0-maccatalyst -c Release -p:CreatePackage=false --no-restore -o ./publish
+    
+    - name: 创建 .dmg 文件
+      run: |
+        hdiutil create -srcfolder ./publish/LTXTools.app -volname "LTX工具集" -format UDZO LTX工具集.dmg
+    
+    - name: 上传 .app
+      uses: actions/upload-artifact@v4
+      with:
+        name: LTXTools-app
+        path: ./publish/LTXTools.app
+    
+    - name: 上传 .dmg
+      uses: actions/upload-artifact@v4
+      with:
+        name: LTXTools-dmg
+        path: ./LTX工具集.dmg
