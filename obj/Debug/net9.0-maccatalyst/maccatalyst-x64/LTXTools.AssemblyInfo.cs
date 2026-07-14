@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LTXTools")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+22fb4d8a0a8a540041516b29e45c9e30e828918c")]
 [assembly: System.Reflection.AssemblyProductAttribute("LTXTools")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LTXTools")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
