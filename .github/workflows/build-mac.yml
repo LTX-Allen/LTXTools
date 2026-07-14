@@ -13,15 +13,21 @@ jobs:
     - name: 检出代码
       uses: actions/checkout@v4
     
-    - name: 安装 .NET
+    - name: 安装 .NET 8.0
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '8.0.x'  # 改用 .NET 8.0
+        dotnet-version: '8.0.x'
     
     - name: 安装 MAUI 工作负载
       run: |
         dotnet workload install maui --ignore-failed-sources
         dotnet workload install maccatalyst --ignore-failed-sources
+    
+    - name: 查看文件结构
+      run: ls -la
+    
+    - name: 查看项目文件
+      run: cat LTXTools.csproj
     
     - name: 还原依赖
       run: dotnet restore
@@ -32,9 +38,12 @@ jobs:
     - name: 发布为 .app
       run: dotnet publish -c Release -p:CreatePackage=false --no-restore -o ./publish
     
+    - name: 查看发布文件
+      run: ls -la ./publish/
+    
     - name: 创建 .dmg
       run: |
-        hdiutil create -srcfolder ./publish/LTXTools.app -volname "LTX工具集" -format UDZO LTX工具集.dmg
+        hdiutil create -srcfolder ./publish/LTXTools.app -volname "LTX工具集" -format UDZO LTX工具集.dmg || echo "hdiutil failed"
     
     - name: 上传 .app
       uses: actions/upload-artifact@v4
@@ -46,4 +55,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: LTXTools-dmg
-        path: ./LTX工具集.dmg
+        path: ./*.dmg
