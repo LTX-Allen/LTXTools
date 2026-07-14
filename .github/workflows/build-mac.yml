@@ -23,19 +23,34 @@ jobs:
         dotnet workload install maui --ignore-failed-sources
         dotnet workload install maccatalyst --ignore-failed-sources
     
-    - name: 清理
+    - name: 查看文件结构
       run: |
-        dotnet clean
-        rm -rf obj bin
+        echo "=== 当前目录 ==="
+        ls -la
+        echo "=== Platforms 目录 ==="
+        ls -la Platforms/ || echo "Platforms 不存在"
+        echo "=== MacCatalyst 目录 ==="
+        ls -la Platforms/MacCatalyst/ || echo "MacCatalyst 不存在"
     
-    - name: 还原依赖（指定目标框架）
-      run: dotnet restore --runtime maccatalyst-x64
+    - name: 查看项目文件
+      run: cat LTXTools.csproj
+    
+    - name: 还原依赖
+      run: dotnet restore
     
     - name: 构建
-      run: dotnet build -c Release --runtime maccatalyst-x64 --no-restore
+      run: dotnet build -c Release --no-restore
     
     - name: 发布为 .app
-      run: dotnet publish -c Release --runtime maccatalyst-x64 -p:CreatePackage=false --no-restore -o ./publish
+      run: |
+        dotnet publish -c Release -p:CreatePackage=false --no-restore -o ./publish
+        echo "=== 发布后的文件 ==="
+        ls -la ./publish/ || echo "publish 文件夹不存在"
+    
+    - name: 查找 .app 文件
+      run: |
+        echo "=== 查找所有 .app 文件 ==="
+        find . -name "*.app" -type d 2>/dev/null || echo "未找到 .app 文件"
     
     - name: 创建 .dmg
       run: |
@@ -43,16 +58,22 @@ jobs:
           hdiutil create -srcfolder ./publish/LTXTools.app -volname "LTX工具集" -format UDZO LTX工具集.dmg
         else
           echo "❌ LTXTools.app 不存在"
+          echo "=== 检查 publish 目录内容 ==="
+          ls -la ./publish/ || echo "publish 目录不存在"
+          echo "=== 检查整个项目中的 .app 文件 ==="
+          find . -name "*.app" -type d 2>/dev/null
           exit 1
         fi
     
     - name: 上传 .app
+      if: success()
       uses: actions/upload-artifact@v4
       with:
         name: LTXTools-app
         path: ./publish/LTXTools.app
     
     - name: 上传 .dmg
+      if: success()
       uses: actions/upload-artifact@v4
       with:
         name: LTXTools-dmg
