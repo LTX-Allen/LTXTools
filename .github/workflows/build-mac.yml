@@ -16,7 +16,7 @@ jobs:
     - name: 安装 .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: '9.0.x'
+        dotnet-version: '8.0.x'  # 改用 .NET 8.0
     
     - name: 安装 MAUI 工作负载
       run: |
@@ -26,13 +26,13 @@ jobs:
     - name: 还原依赖
       run: dotnet restore
     
-    - name: 构建 macOS 应用
-      run: dotnet build -f net9.0-maccatalyst -c Release --no-restore
+    - name: 构建
+      run: dotnet build -c Release --no-restore
     
     - name: 发布为 .app
-      run: dotnet publish -f net9.0-maccatalyst -c Release -p:CreatePackage=false --no-restore -o ./publish
+      run: dotnet publish -c Release -p:CreatePackage=false --no-restore -o ./publish
     
-    - name: 创建 .dmg 文件
+    - name: 创建 .dmg
       run: |
         hdiutil create -srcfolder ./publish/LTXTools.app -volname "LTX工具集" -format UDZO LTX工具集.dmg
     
