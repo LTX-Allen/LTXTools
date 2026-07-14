@@ -24,27 +24,29 @@ jobs:
         dotnet workload install maccatalyst --ignore-failed-sources
     
     - name: 查看文件结构
-      run: ls -la
+      run: |
+        ls -la
+        echo "=== 查看项目文件 ==="
+        cat LTXTools.csproj
     
-    - name: 还原依赖（关键步骤！）
-      run: dotnet restore -f net9.0-maccatalyst
+    - name: 还原依赖
+      run: dotnet restore
     
     - name: 构建
-      run: dotnet build -f net9.0-maccatalyst -c Release --no-restore
+      run: dotnet build -c Release --no-restore
     
     - name: 发布为 .app
-      run: dotnet publish -f net9.0-maccatalyst -c Release -p:CreatePackage=false --no-restore -o ./publish
+      run: dotnet publish -c Release -p:CreatePackage=false --no-restore -o ./publish
     
     - name: 查看发布文件
-      run: ls -la ./publish/
+      run: ls -la ./publish/ || echo "publish 文件夹不存在"
     
     - name: 创建 .dmg
       run: |
         if [ -d "./publish/LTXTools.app" ]; then
           hdiutil create -srcfolder ./publish/LTXTools.app -volname "LTX工具集" -format UDZO LTX工具集.dmg
         else
-          echo "LTXTools.app 不存在，查看目录内容："
-          ls -la ./publish/
+          echo "LTXTools.app 不存在"
           exit 1
         fi
     
