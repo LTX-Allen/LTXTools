@@ -18,7 +18,7 @@
     <!-- 支持的最低 macOS 版本 -->
     <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
 
-    <!-- 跳过警告 -->
+    <!-- 跳过 MA002 警告 -->
     <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
   </PropertyGroup>
 
