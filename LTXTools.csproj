@@ -8,6 +8,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <SupportedOSPlatformVersion>15.0</SupportedOSPlatformVersion>
+
+    <!-- ⬇️ 添加这两行 ⬇️ -->
+    <ApplicationId>com.ltxallen.ltxtools</ApplicationId>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+
+    <!-- 跳过 MA002 警告 -->
+    <SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
   </PropertyGroup>
+
+  <!-- 添加 MAUI 包引用 -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="9.0.120" />
+  </ItemGroup>
 
 </Project>
